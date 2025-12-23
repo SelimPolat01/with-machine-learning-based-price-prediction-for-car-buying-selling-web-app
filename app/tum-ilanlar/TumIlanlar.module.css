@@ -1,11 +1,60 @@
 .main {
   display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.div {
+  display: flex;
   flex-wrap: wrap;
-  margin: 0 0 0 1rem;
   gap: 0.5rem;
+  max-width: 1142px;
+}
+
+.filterDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterTextDiv h2 {
+  font-family: sans-serif;
+  font-size: 20px;
+  padding: 0 0 10px 0;
+  margin: 0;
+  color: gray;
+}
+
+.filterDiv i {
+  color: rgb(121, 148, 175);
+  font-size: 18px;
+}
+
+.filterWrapper1 {
+  border: 1px solid #ccc;
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.filterWrapper2 {
+  padding: 10px 1rem;
+}
+
+.ul {
+  margin: 0;
+  padding: 0;
+}
+
+.ul li {
+  width: 150px;
+  list-style-type: none;
+  height: 25px;
 }
 
 .link {
-  width: 220px;
-  height: 300px;
+  color: rgb(72, 144, 216);
+}
+
+.link:hover {
+  text-decoration: underline;
 }

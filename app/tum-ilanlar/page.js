@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation.js";
 import { useCheckAuth } from "@/backend/utils/useCheckAuth.js";
 import LoadingSpinner from "../components/LoadingSpinner.js";
 import ConfirmDialog from "../components/ConfirmDialog.js";
+import Link from "next/link.js";
 
 export default function AllAdverts() {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ export default function AllAdverts() {
   const [selectedAdvertId, setSelectedAdvertId] = useState(null);
   const allAdverts = useSelector((state) => state.adverts.allAdverts);
   const user = useSelector((state) => state.auth.user);
+  const uniqueBrands = Array.from(
+    new Set(allAdverts.map((advert) => advert.brand))
+  );
   useCheckAuth();
 
   useEffect(() => {
@@ -100,6 +104,14 @@ export default function AllAdverts() {
     deleteDialogRef.current.showModal();
   }
 
+  function capitalize(text) {
+    if (typeof text !== "string") {
+      return "";
+    }
+
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  }
+
   // if (loading) return <LoadingSpinner />;
   if (error) return <p>{error}</p>;
   if (!allAdverts || allAdverts.length === 0) return <p>İlan Bulunamadı</p>;
@@ -111,23 +123,44 @@ export default function AllAdverts() {
         onConfirm={() => advertDeleteHandler(selectedAdvertId)}
         text="Bu ilanı yayından kaldırmak"
       />
-
-      {allAdverts.map((advert) => (
-        <AdvertItem
-          id={advert.id}
-          key={advert.id}
-          imgSrc={advert.image_src}
-          brand={advert.brand}
-          model={advert.model}
-          engineCapacity={advert.engine_capacity}
-          modelYear={advert.model_year}
-          price={advert.price}
-          city={advert.city}
-          onDeleteDialog={() => openDeleteModal(advert.id)}
-          showDeleteButton={user && user.id === advert.user_id}
-          showEditButton={user && user.id === advert.user_id}
-        />
-      ))}
+      <div className={classes.filterDiv}>
+        <div className={classes.filterTextDiv}>
+          <h2>
+            Otomobil <i className="fa fa-filter"></i>
+          </h2>
+        </div>
+        <div className={classes.filterWrapper1}>
+          <div className={classes.filterWrapper2}>
+            <ul className={classes.ul}>
+              {uniqueBrands.map((brand) => (
+                <li>
+                  <Link className={classes.link} href={`/arama?q=${brand}`}>
+                    {capitalize(decodeURIComponent(brand))}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className={classes.div}>
+        {allAdverts.map((advert) => (
+          <AdvertItem
+            id={advert.id}
+            key={advert.id}
+            imgSrc={advert.image_src}
+            brand={advert.brand}
+            model={advert.model}
+            engineCapacity={advert.engine_capacity}
+            modelYear={advert.model_year}
+            price={advert.price}
+            city={advert.city}
+            onDeleteDialog={() => openDeleteModal(advert.id)}
+            showDeleteButton={user && user.id === advert.user_id}
+            showEditButton={user && user.id === advert.user_id}
+          />
+        ))}
+      </div>
     </main>
   );
 }
