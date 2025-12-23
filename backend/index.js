@@ -13,7 +13,7 @@ const PORT = Number(process.env.PORT);
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONT_END_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
