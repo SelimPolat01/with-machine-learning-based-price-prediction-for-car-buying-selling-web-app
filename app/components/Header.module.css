@@ -1,0 +1,91 @@
+.nav {
+  margin: 0 2rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+}
+
+.li {
+  width: 28px;
+  height: 28px;
+}
+
+.logo {
+  margin-left: 1rem;
+  transition: transform 0.5 ease;
+}
+
+/* .logo:hover {
+  transform: scale(1.2);
+} */
+
+.registerLink,
+.logoutLink {
+  margin: 0 1.5rem 0 0;
+}
+
+.favoriteAdvertsLink {
+  display: inline-block;
+  margin: 4px 0 0 0;
+}
+
+.favoriteAdvertsLink i {
+  color: white;
+  border-radius: 8px;
+  transition: transform 0.5s ease;
+  display: inline-block;
+  font-weight: bold;
+  border: none;
+  font-size: 22px;
+}
+
+.homeLink i,
+.registerLink i,
+.loginLink i,
+.logoutLink i,
+.allAdvertsLink i,
+.myAdvertsLink i {
+  color: white;
+  border-radius: 8px;
+  transition: transform 0.5s ease;
+  display: inline-block;
+  font-weight: bold;
+  border: none;
+  font-size: 28px;
+}
+
+.homeLink i:hover {
+  transform: scale(1.2);
+}
+
+.registerLink i:hover {
+  transform: scale(1.2);
+}
+
+.loginLink i:hover {
+  transform: scale(1.2);
+}
+
+.logoutLink i:hover {
+  transform: scale(1.2);
+}
+
+.allAdvertsLink i:hover {
+  transform: scale(1.2);
+}
+
+.favoriteAdvertsLink i:hover {
+  transform: scale(1.2);
+}
+
+.myAdvertsLink i:hover {
+  transform: scale(1.2);
+}
