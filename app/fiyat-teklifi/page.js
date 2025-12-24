@@ -57,7 +57,7 @@ export default function PriceOffer() {
           {prediction.brand.toUpperCase()} {capitalize(prediction.model)}{" "}
           {engineCapacityFormat(prediction.engineCapacity)}
         </h2>
-        {/* <svg
+        <svg
           className={classes.svg}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -79,7 +79,7 @@ export default function PriceOffer() {
           <p>Motor Hacmi: </p>
           <p>Yakıt Tipi: </p>
           <p>Kilometre: </p>
-        </div> */}
+        </div>
       </div>
       <div className={classes.div}>
         <motion.div

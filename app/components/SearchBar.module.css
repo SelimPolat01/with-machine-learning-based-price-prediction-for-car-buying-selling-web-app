@@ -1,6 +1,7 @@
 .div {
   position: relative;
   font-family: "Oswald", sans-serif;
+  height: 32px;
 }
 
 .form {

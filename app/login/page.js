@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "@/app/components/Input";
 import classes from "./Login.module.css";
 import Button from "@/app/components/Button";
@@ -22,8 +22,6 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  // const emailRef = useRef();
-  // const passwordRef = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {

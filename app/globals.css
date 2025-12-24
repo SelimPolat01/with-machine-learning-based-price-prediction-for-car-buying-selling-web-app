@@ -225,6 +225,7 @@ a {
   display: flex;
   flex-direction: column;
   background-color: white;
+  margin: 2rem 0 0 0;
 }
 
 .iconUl {

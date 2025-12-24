@@ -44,24 +44,30 @@ export default function Header({ className }) {
         className: "homeLink",
         title: "Anasayfa",
       },
-      {
-        href: "/ilanlarim",
-        label: <i className="bi bi-megaphone"></i>,
-        className: "myAdvertsLink",
-        title: "İlanlarım",
-      },
-      {
-        href: "/tum-ilanlar",
-        label: <i className="bi bi-card-list"></i>,
-        className: "allAdvertsLink",
-        title: "Tüm İlanlar",
-      },
-      {
-        href: "/favori-ilanlar",
-        label: <i className="bi bi-heart-fill"></i>,
-        className: "favoriteAdvertsLink",
-        title: "Favori İlanlar",
-      },
+      // {
+      //   href: "/hesabim",
+      //   label: <i className="bi bi-person"></i>,
+      //   className: "accountLink",
+      //   title: "Hesabım",
+      // },
+      // {
+      //   href: "/ilanlarim",
+      //   label: <i className="bi bi-megaphone"></i>,
+      //   className: "myAdvertsLink",
+      //   title: "İlanlarım",
+      // },
+      // {
+      //   href: "/tum-ilanlar",
+      //   label: <i className="bi bi-card-list"></i>,
+      //   className: "allAdvertsLink",
+      //   title: "Tüm İlanlar",
+      // },
+      // {
+      //   href: "/favori-ilanlar",
+      //   label: <i className="bi bi-heart-fill"></i>,
+      //   className: "favoriteAdvertsLink",
+      //   title: "Favori İlanlar",
+      // },
     ],
   };
 
@@ -110,8 +116,63 @@ export default function Header({ className }) {
                 </Link>
               </li>
             ))}
-
           {isLogin && (
+            <>
+              <Link
+                className={`${classes.allAdvertsLink}${
+                  className ? ` ${className}` : ""
+                }`}
+                title="Tüm İlanlar"
+                href="/tum-ilanlar"
+              >
+                <i className="bi bi-card-list"></i>
+              </Link>
+              <li className={classes.account}>
+                <Link
+                  className={`${classes.accountLink}${
+                    className ? ` ${className}` : ""
+                  }`}
+                  title="Hesabım"
+                  href="/hesabim"
+                >
+                  <i className="bi bi-person"></i>
+                </Link>
+                <ul className={classes.accountMenu}>
+                  <Link
+                    href="/ilanlarim"
+                    className={classes.myAdvertsLink}
+                    title="İlanlarım"
+                  >
+                    <i className="bi bi-megaphone"></i> İlanlarım
+                  </Link>
+                  <Link
+                    href="/favori-ilanlar"
+                    className={classes.favoriteAdvertsLink}
+                    title="Favori İlanlarım"
+                  >
+                    <i className="bi bi-heart-fill"></i> Favori İlanlarım
+                  </Link>
+                  <Link
+                    href="/hesabim"
+                    className={classes.juniorAccountLink}
+                    title="Hesabım"
+                  >
+                    <i className="bi bi-person"></i> Hesabım
+                  </Link>
+                  <Link
+                    href="/login"
+                    onClick={logoutHandler}
+                    className={classes.favoriteAdvertsLink}
+                    title="Çıkış Yap"
+                  >
+                    <i className="bi bi-box-arrow-right"></i> Çıkış Yap
+                  </Link>
+                </ul>
+              </li>
+            </>
+          )}
+
+          {/* {isLogin && (
             <li className={classes.li}>
               <Link
                 onClick={logoutHandler}
@@ -124,7 +185,7 @@ export default function Header({ className }) {
                 <i className="bi bi-box-arrow-right"></i>
               </Link>
             </li>
-          )}
+          )} */}
         </ul>
       </nav>
     </header>

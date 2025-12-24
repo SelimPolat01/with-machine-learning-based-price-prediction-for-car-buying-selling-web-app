@@ -10,12 +10,6 @@ export const db = new Pool({
   port: Number(process.env.DB_PORT),
 });
 
-console.log(db.user);
-console.log(db.host);
-console.log(db.database);
-console.log(db.password);
-console.log(db.port);
-
 db.query("SELECT NOW()")
   .then((res) => console.log("DB Bağlantısı başarılı:", res.rows))
   .catch((err) => console.log("DB bağlantı hatası:", err));

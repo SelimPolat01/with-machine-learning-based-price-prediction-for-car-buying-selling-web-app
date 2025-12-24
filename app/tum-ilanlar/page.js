@@ -132,8 +132,8 @@ export default function AllAdverts() {
         <div className={classes.filterWrapper1}>
           <div className={classes.filterWrapper2}>
             <ul className={classes.ul}>
-              {uniqueBrands.map((brand) => (
-                <li>
+              {uniqueBrands.map((brand, index) => (
+                <li key={index}>
                   <Link className={classes.link} href={`/arama?q=${brand}`}>
                     {capitalize(decodeURIComponent(brand))}
                   </Link>

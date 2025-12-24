@@ -1,5 +1,5 @@
 .nav {
-  margin: 0 2rem 0 0;
+  margin: 0 4.5rem 0 0;
   display: flex;
   justify-content: space-between;
   height: 60px;
@@ -11,6 +11,7 @@
   margin: 0;
   padding: 0;
   gap: 1.5rem;
+  height: 32px;
 }
 
 .li {
@@ -28,31 +29,20 @@
 } */
 
 .registerLink,
-.logoutLink {
+.accountLink {
   margin: 0 1.5rem 0 0;
 }
 
-.favoriteAdvertsLink {
+/* .favoriteAdvertsLink {
   display: inline-block;
   margin: 4px 0 0 0;
-}
-
-.favoriteAdvertsLink i {
-  color: white;
-  border-radius: 8px;
-  transition: transform 0.5s ease;
-  display: inline-block;
-  font-weight: bold;
-  border: none;
-  font-size: 22px;
-}
+} */
 
 .homeLink i,
 .registerLink i,
 .loginLink i,
-.logoutLink i,
 .allAdvertsLink i,
-.myAdvertsLink i {
+.accountLink i {
   color: white;
   border-radius: 8px;
   transition: transform 0.5s ease;
@@ -62,30 +52,74 @@
   font-size: 28px;
 }
 
-.homeLink i:hover {
+.homeLink i:hover,
+.registerLink i:hover,
+.loginLink i:hover,
+.allAdvertsLink i:hover,
+.accountLink i:hover {
   transform: scale(1.2);
 }
 
-.registerLink i:hover {
-  transform: scale(1.2);
+.account {
+  position: relative;
+  height: 28px;
+  margin: 0;
 }
 
-.loginLink i:hover {
-  transform: scale(1.2);
+.accountMenu {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 4px;
+  background-color: gray;
+  z-index: 1000;
+  border-radius: 8px;
+  display: none;
 }
 
-.logoutLink i:hover {
-  transform: scale(1.2);
+.account:hover .accountMenu {
+  display: block;
 }
 
-.allAdvertsLink i:hover {
-  transform: scale(1.2);
+.accountMenu li {
+  list-style: none;
 }
 
-.favoriteAdvertsLink i:hover {
-  transform: scale(1.2);
+.accountMenu a {
+  width: 120px;
+  display: inline-block;
+  color: white;
+  transition: color 0.15s ease-in;
+  padding: 6px;
 }
 
-.myAdvertsLink i:hover {
-  transform: scale(1.2);
+.accountMenu a:hover {
+  color: orangered;
+}
+
+.accountMenu i {
+  transition: color 0.25s ease-in;
+}
+
+.myAdvertsLink,
+.favoriteAdvertsLink,
+.logoutLink,
+.juniorAccountLink {
+  font-size: 14px;
+  height: 14px;
+}
+
+.logoutLink i,
+.myAdvertsLink i,
+.favoriteAdvertsLink i,
+.juniorAccountLink i {
+  color: white;
+  border-radius: 8px;
+  transition: transform 0.5s ease;
+  display: inline-block;
+  font-weight: bold;
+  border: none;
+  font-size: 14px;
 }
