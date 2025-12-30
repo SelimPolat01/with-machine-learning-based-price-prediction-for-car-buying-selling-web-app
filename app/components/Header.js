@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import classes from "./Header.module.css";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/authSlice";
 import Image from "next/image";
@@ -11,11 +11,13 @@ import SearchBar from "./SearchBar";
 export default function Header({ className }) {
   const path = usePathname();
   const dispatch = useDispatch();
+  const router = useRouter();
   const { isInitialized, isLogin } = useSelector((state) => state.auth);
   if (!isInitialized) return null;
 
   function logoutHandler() {
     dispatch(logout());
+    router.replace("/login");
     localStorage.removeItem("token");
   }
 

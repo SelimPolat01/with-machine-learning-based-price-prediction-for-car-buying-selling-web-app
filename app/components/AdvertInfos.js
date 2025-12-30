@@ -7,9 +7,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useCheckAuth } from "@/backend/utils/useCheckAuth";
 import classes from "./AdvertInfos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingSpinner from "./LoadingSpinner";
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function AdvertInfos() {
@@ -18,8 +15,6 @@ export default function AdvertInfos() {
   const params = useParams();
   const router = useRouter();
   const [advert, setAdvert] = useState(null);
-  const [mailText, setMailText] = useState("");
-  const [showMailInput, setShowMailInput] = useState(false);
   const [showDescription, setShowDescription] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
@@ -109,64 +104,6 @@ export default function AdvertInfos() {
     } finally {
       setLoading(false);
     }
-  }
-
-  async function sendMail() {
-    const token = localStorage.getItem("token");
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/adverts/sendMail`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            advertId: advert.id,
-            message: mailText,
-          }),
-        }
-      );
-
-      if (response.status === 401) {
-        localStorage.removeItem("token");
-        router.replace("/login");
-        return;
-      }
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.message);
-        return;
-      }
-    } catch (err) {
-      console.log("Error: " + err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-      setMailText("");
-      setShowMailInput(false);
-    }
-  }
-
-  function mailInputChangeHandler(event) {
-    setMailText(event.target.value);
-  }
-
-  function mailManagementHandler() {
-    if (!showMailInput) {
-      setShowMailInput(true);
-      return;
-    }
-
-    if (!mailText.trim()) {
-      setShowMailInput(false);
-      return;
-    }
-
-    sendMail();
   }
 
   function formatBrandModel(text) {

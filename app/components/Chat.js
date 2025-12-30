@@ -58,22 +58,16 @@ export default function Chat({ currentUserId, initialTargetUserId, advertId }) {
           return;
         }
 
-        const advertData = await response.json();
-
-        setAdvertInfo({
-          name: advertData[0].user_name,
-          surname: advertData[0].user_surname,
-          tel: advertData[0].user_tel,
-        });
+        const messageData = await response.json();
 
         setMessages(
-          advertData.map((advert) => ({
-            id: advert.id,
-            message: advert.message,
-            user_id: advert.user_id,
-            receiver_id: advert.receiver_id,
-            created_at: advert.created_at
-              ? advert.created_at
+          messageData.map((msg) => ({
+            id: msg.id,
+            message: msg.message,
+            user_id: msg.user_id,
+            receiver_id: msg.receiver_id,
+            created_at: msg.created_at
+              ? msg.created_at
               : new Date().toISOString(),
           }))
         );
@@ -87,6 +81,49 @@ export default function Chat({ currentUserId, initialTargetUserId, advertId }) {
 
     fetchMessages();
   }, [router, advertId]);
+
+  useEffect(() => {
+    async function fetchAdvertInfos() {
+      const token = localStorage.getItem("token");
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_URL}/adverts/${advertId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.status === 401) {
+          localStorage.removeItem("token");
+          router.replace("/login");
+          return;
+        }
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          setError(errorData.message);
+          return;
+        }
+
+        const advertData = await response.json();
+        setAdvertInfo({
+          name: advertData.user_name,
+          surname: advertData.user_surname,
+          tel: advertData.user_tel,
+        });
+      } catch (err) {
+        console.log("Error: " + err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAdvertInfos();
+  }, [router]);
 
   function messageInputChangeHandler(event) {
     setMessage(event.target.value);
@@ -129,10 +166,12 @@ export default function Chat({ currentUserId, initialTargetUserId, advertId }) {
         <div className={classes.advertOwnerInfo}>
           <h3 className={classes.advertOwnerName}>
             {capitalizeText(advertInfo.name)}{" "}
-            {capitalizeText(advertInfo.surname.charAt(0))}.
+            {capitalizeText(advertInfo.surname?.charAt(0))}.
           </h3>
-          <div className={classes.advertOwnerTelDiv}>
-            <p className={classes.advertOwnerTel}>0{advertInfo.tel}</p>
+          <div
+            className={advertInfo.name !== "" ? classes.advertOwnerTelDiv : ""}
+          >
+            <p className={classes.advertOwnerTel}>{advertInfo.tel}</p>
           </div>
         </div>
         <div className={classes.messageDiv}>

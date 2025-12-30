@@ -89,6 +89,7 @@ export default function SearchBar() {
           value={query}
           placeholder="İlan Ara..."
           className={classes.input}
+          name="search"
         />
         <button type="submit" className={classes.button}>
           <svg

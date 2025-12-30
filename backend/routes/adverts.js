@@ -177,7 +177,7 @@ router.get("/messages/:advertId", verifyToken, async (req, res) => {
 
   try {
     const result = await db.query(
-      "SELECT m.id, m.user_id, m.receiver_id, m.message, u.name AS user_name, u.surname AS user_surname, u.tel_number AS user_tel FROM messages AS m JOIN users as u ON u.id = m.user_id WHERE advert_id = $1 AND (user_id = $2 OR receiver_id = $2) ORDER BY m.created_at ASC",
+      "SELECT m.id, m.user_id, m.receiver_id, m.message FROM messages AS m JOIN users as u ON u.id = m.user_id WHERE advert_id = $1 AND (user_id = $2 OR receiver_id = $2) ORDER BY m.created_at ASC",
       [advertId, userId]
     );
     return res.status(200).json(result.rows);

@@ -10,6 +10,7 @@ import Button from "./Button";
 export default function MyMessageAdvertItem({ advert }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  if (!user || !advert) return null;
   const targetUserId =
     user.id === advert.advert_owner_id ? null : advert.advert_owner_id;
 
