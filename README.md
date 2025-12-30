@@ -136,7 +136,7 @@ npm run dev
 ### 3. Gerçek Zamanlı Mesajlaşma (WebSocket)
 
 1. Socket.IO kullanılarak uygulamada gerçek zamanlı mesajlaşma sağlanmıştır.
-2. Kullanıcılar register event’i ile bağlanır ve kendi userId odalarına join olur.
+2. Kullanıcılar register event’i ile bağlanır ve socketId üzerinden mesaj gönderilir.
 3. sendMessageToUser event’i ile tek bir kullanıcıya mesaj gönderilir.
 4. Mesajlar veritabanına kaydedilir, böylece kullanıcı offline olsa bile mesajlar saklanır.
 
