@@ -93,7 +93,7 @@ export default function Chat({ currentUserId, initialTargetUserId, advertId }) {
   }
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io(process.env.NEXT_PUBLIC_URL);
     socketRef.current.emit("register", currentUserId);
     socketRef.current.on("receiveMessage", (msg) => {
       setMessages((prev) => [...prev, msg]);
