@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation.js";
 import { useCheckAuth } from "@/backend/utils/useCheckAuth.js";
 import LoadingSpinner from "../components/LoadingSpinner.js";
 import ConfirmDialog from "../components/ConfirmDialog.js";
-import Link from "next/link.js";
+import { AnimatePresence } from "framer-motion";
+import FilterBrand from "../components/FilterBrand.js";
 
 export default function AllAdverts() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function AllAdverts() {
   const [selectedAdvertId, setSelectedAdvertId] = useState(null);
   const allAdverts = useSelector((state) => state.adverts.allAdverts);
   const user = useSelector((state) => state.auth.user);
+  const filteredAdverts = useSelector((state) => state.adverts.filteredAdverts);
   const uniqueBrands = Array.from(
     new Set(allAdverts.map((advert) => advert.brand))
   );
@@ -104,14 +106,6 @@ export default function AllAdverts() {
     deleteDialogRef.current.showModal();
   }
 
-  function capitalize(text) {
-    if (typeof text !== "string") {
-      return "";
-    }
-
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  }
-
   // if (loading) return <LoadingSpinner />;
   if (error) return <p>{error}</p>;
   if (!allAdverts || allAdverts.length === 0) return <p>İlan Bulunamadı</p>;
@@ -133,33 +127,31 @@ export default function AllAdverts() {
           <div className={classes.filterWrapper2}>
             <ul className={classes.ul}>
               {uniqueBrands.map((brand, index) => (
-                <li key={index}>
-                  <Link className={classes.link} href={`/arama?q=${brand}`}>
-                    {capitalize(decodeURIComponent(brand))}
-                  </Link>
-                </li>
+                <FilterBrand brand={brand} key={index} />
               ))}
             </ul>
           </div>
         </div>
       </div>
       <div className={classes.div}>
-        {allAdverts.map((advert) => (
-          <AdvertItem
-            id={advert.id}
-            key={advert.id}
-            imgSrc={advert.image_src}
-            brand={advert.brand}
-            model={advert.model}
-            engineCapacity={advert.engine_capacity}
-            modelYear={advert.model_year}
-            price={advert.price}
-            city={advert.city}
-            onDeleteDialog={() => openDeleteModal(advert.id)}
-            showDeleteButton={user && user.id === advert.user_id}
-            showEditButton={user && user.id === advert.user_id}
-          />
-        ))}
+        <AnimatePresence>
+          {filteredAdverts.map((advert) => (
+            <AdvertItem
+              id={advert.id}
+              key={advert.id}
+              imgSrc={advert.image_src}
+              brand={advert.brand}
+              model={advert.model}
+              engineCapacity={advert.engine_capacity}
+              modelYear={advert.model_year}
+              price={advert.price}
+              city={advert.city}
+              onDeleteDialog={() => openDeleteModal(advert.id)}
+              showDeleteButton={user && user.id === advert.user_id}
+              showEditButton={user && user.id === advert.user_id}
+            />
+          ))}
+        </AnimatePresence>
       </div>
     </main>
   );

@@ -121,13 +121,13 @@ export default function Login() {
     <div className={classes.div}>
       <form onSubmit={submitHandler}>
         <Input
+          className={classes.input}
           type="text"
           identifier="email"
           onChange={inputChangeHandler}
           onBlur={inputBlurHandler}
           value={input.email.value}
           label="E-posta"
-          // ref={emailRef}
           autoFocus
           autoComplete="email"
         />
@@ -144,7 +144,7 @@ export default function Login() {
           onBlur={inputBlurHandler}
           value={input.password.value}
           label="Parola"
-          // ref={passwordRef}
+          className={classes.input}
           autoComplete="current-password"
         />
         {!isPasswordValid && input.password.isBlur && (

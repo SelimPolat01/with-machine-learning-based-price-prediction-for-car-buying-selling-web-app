@@ -15,14 +15,22 @@
   width: 1055px;
 }
 
+.filteredAdvertDiv {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
 .listHeader {
   display: grid;
   grid-template-columns: 135px 1fr 100px 100px 100px;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: beige;
   min-height: 35px;
   gap: 2px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .listHeader span {
@@ -34,9 +42,9 @@
   display: grid;
   grid-template-columns: 135px 1fr 100px 100px 100px;
   align-items: center;
-  padding: 8px 4px;
+  padding: 8px;
   min-height: 100px;
-  background-color: beige;
+  background-color: rgb(233, 218, 244);
 }
 
 .listItem span {
@@ -49,7 +57,7 @@
 }
 
 .price {
-  color: blueviolet;
+  color: darkcyan;
 }
 
 .title:hover {
@@ -59,4 +67,5 @@
 .img {
   width: 135px;
   height: 100px;
+  border-radius: 8px;
 }

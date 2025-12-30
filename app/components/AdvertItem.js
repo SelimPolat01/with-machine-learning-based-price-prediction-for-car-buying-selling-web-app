@@ -84,7 +84,8 @@ export default function AdvertItem({
         </div>
         <div className={classes.brandModelEngineCapacityDiv}>
           <p className={classes.brandModel}>
-            {capitalizeText(brand)} {capitalizeText(model)}
+            {decodeURIComponent(capitalizeText(brand))}{" "}
+            {decodeURIComponent(capitalizeText(model))}
           </p>
           <p className={classes.engineCapacity}>
             {engineCapacityFormat(engineCapacity)} TDI

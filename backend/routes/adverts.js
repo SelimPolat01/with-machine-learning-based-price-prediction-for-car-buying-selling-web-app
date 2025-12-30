@@ -40,6 +40,20 @@ router.get("/myAdverts", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/myMessageAdverts", verifyToken, async (req, res) => {
+  const userId = Number(req.user.id);
+  try {
+    const result = await db.query(
+      "SELECT DISTINCT a.id AS advert_id, a.brand, a.model, a.model_year, a.engine_capacity, a.price, a.image_src, a.title, a.user_id AS advert_owner_id FROM adverts AS a JOIN messages AS m ON a.id = m.advert_id WHERE m.user_id = $1 OR m.receiver_id = $1 ORDER BY a.id ASC",
+      [userId]
+    );
+    return res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Sunucu hatası!" });
+  }
+});
+
 router.post("/favoriteAdverts/:advertId", verifyToken, async (req, res) => {
   const advertId = Number(req.params.advertId);
   const userId = Number(req.user.id);
@@ -154,5 +168,21 @@ router.put("/edit", verifyToken, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Sunucu hatası." });
+  }
+});
+
+router.get("/messages/:advertId", verifyToken, async (req, res) => {
+  const userId = req.user.id;
+  const advertId = req.params.advertId;
+
+  try {
+    const result = await db.query(
+      "SELECT m.id, m.user_id, m.receiver_id, m.message, u.name AS user_name, u.surname AS user_surname, u.tel_number AS user_tel FROM messages AS m JOIN users as u ON u.id = m.user_id WHERE advert_id = $1 AND (user_id = $2 OR receiver_id = $2) ORDER BY m.created_at ASC",
+      [advertId, userId]
+    );
+    return res.status(200).json(result.rows);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Sunucu hatası!" });
   }
 });

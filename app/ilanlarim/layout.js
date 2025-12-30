@@ -1,4 +1,5 @@
 import Header from "@/app/components/Header";
+import classes from "./Ilanlarim.module.css";
 
 export const metadata = {
   title: "İlanlarım",
@@ -9,7 +10,7 @@ export default function MyAdvertsLayout({ children }) {
   return (
     <>
       <Header className="blackColorLink" />
-      <main className="rootMain">{children}</main>
+      <main className={classes.rootMain}>{children}</main>
     </>
   );
 }

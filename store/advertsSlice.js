@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allAdverts: [],
+  filteredAdverts: [],
   favoriteAdverts: [],
 };
 
@@ -11,6 +12,12 @@ const advertsSlice = createSlice({
   reducers: {
     setAdverts: (state, action) => {
       state.allAdverts = action.payload;
+      state.filteredAdverts = action.payload;
+    },
+    setFilterAdverts: (state, action) => {
+      state.filteredAdverts = state.allAdverts.filter(
+        (advert) => advert.brand === action.payload
+      );
     },
     setFavorites: (state, action) => {
       state.favoriteAdverts = action.payload;
@@ -28,6 +35,6 @@ const advertsSlice = createSlice({
   },
 });
 
-export const { setAdverts, setFavorites, toggleFavorite } =
+export const { setAdverts, setFilterAdverts, setFavorites, toggleFavorite } =
   advertsSlice.actions;
 export default advertsSlice.reducer;

@@ -110,7 +110,7 @@ export default function SearchBar() {
       {query && (
         <ul className={classes.ul}>
           {uniqueBrands.map((brand, index) => (
-            <li onClick={() => setQuery("")} key={index}>
+            <li className={classes.li} onClick={() => setQuery("")} key={index}>
               <Link href={`/arama?q=${brand}`}>
                 {decodeURIComponent(capitalize(brand))}
               </Link>

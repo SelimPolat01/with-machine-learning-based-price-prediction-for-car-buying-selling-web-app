@@ -10,6 +10,9 @@ import classes from "./FavoriIlanlar.module.css";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ConfirmDialog from "../components/ConfirmDialog";
 import AllAdverts from "../tum-ilanlar/page";
+import FavoriteAdvertItem from "../components/FavoriteAdvertItem";
+import ManagementNav from "../components/ManagementNav";
+import { AnimatePresence } from "framer-motion";
 
 export default function FavoriIlanlar() {
   // const [favoriteAdverts, setFavoriteAdverts] = useState([]);
@@ -112,7 +115,6 @@ export default function FavoriIlanlar() {
 
   // if (loading) return <LoadingSpinner />;
   if (error) return <p>{error}</p>;
-  if (favoriteAdverts.length === 0) return <p>Favori ilanınız yok.</p>;
 
   return (
     <main className={classes.main}>
@@ -121,23 +123,34 @@ export default function FavoriIlanlar() {
         onConfirm={() => removeFavoriteAdvert(selectedAdvertId)}
         text="Bu ilanı favorilerden kaldırmak"
       />
-      {favoriteAdverts &&
-        favoriteAdverts.map((favoriteAdvert) => (
-          <AdvertItem
-            id={favoriteAdvert.id}
-            key={favoriteAdvert.id}
-            imgSrc={favoriteAdvert.image_src}
-            brand={favoriteAdvert.brand}
-            model={favoriteAdvert.model}
-            engineCapacity={favoriteAdvert.engine_capacity}
-            modelYear={favoriteAdvert.model_year}
-            price={favoriteAdvert.price}
-            city={favoriteAdvert.city}
-            onDeleteDialog={() => openDeleteModal(favoriteAdvert.id)}
-            showDeleteButton={user && user.id !== favoriteAdvert.user_id}
-            showEditButton={false}
-          />
-        ))}
+      <ManagementNav className={classes.managementNav} />
+      <div className={classes.myFavoriteAdvertsTextDiv}>
+        <h3>Favori İlanlarım</h3>
+        <hr style={{ width: "845px" }} />
+      </div>
+      <div className={classes.listWrapper}>
+        <div className={classes.listHeader}>
+          <span>Fotoğraf</span>
+          <span>İlan Başlığı</span>
+          <span>Fiyat</span>
+        </div>
+        <AnimatePresence>
+          {favoriteAdverts &&
+            favoriteAdverts.map((favoriteAdvert) => (
+              <FavoriteAdvertItem
+                key={favoriteAdvert.id}
+                advert={favoriteAdvert}
+                onDeleteDialog={() => openDeleteModal(favoriteAdvert.id)}
+                showDeleteButton={user && user.id !== favoriteAdvert.user_id}
+              />
+            ))}
+        </AnimatePresence>
+        {favoriteAdverts.length === 0 && (
+          <div className={classes.noFavoriteAdvertDiv}>
+            <h3>Favori ilanınız bulunmamaktadır.</h3>
+          </div>
+        )}
+      </div>
     </main>
   );
 }

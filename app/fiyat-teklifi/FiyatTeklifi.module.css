@@ -1,3 +1,11 @@
+.rootMain {
+  flex: 1;
+  background: url("/images/price-offer-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .wrapperDiv {
   display: flex;
   flex-direction: column;
@@ -18,11 +26,16 @@
   align-items: center;
 }
 
-.priceOfferText {
-  color: white;
+.svgCircleDiv {
+  position: relative;
 }
 
-.priceOffer {
+.priceOfferText {
+  color: white;
+  margin: 0;
+}
+
+.priceOfferText span {
   color: bisque;
 }
 
@@ -55,11 +68,100 @@
   gap: 0.5rem;
 }
 
+.carModel h2 {
+  color: #ffb74d;
+}
+
 .validatyDateDiv {
   display: flex;
   justify-content: center;
 }
 
+.validatyDate strong {
+  font-weight: normal;
+  color: whitesmoke;
+}
+
 .validatyDate span {
-  color: darkmagenta;
+  color: whitesmoke;
+}
+
+.svgTechParamsWrapper {
+  position: relative;
+}
+
+.svgTechParamsWrapper:hover .techParams {
+  display: block;
+}
+
+.techParams {
+  width: 190px;
+  background-color: whitesmoke;
+  position: absolute;
+  left: 50%;
+  top: 85%;
+  transform: translateX(0%);
+  border-radius: 8px;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 0 6px #fff;
+}
+
+.techParams ul {
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.techParams li {
+  list-style: none;
+  margin: 0;
+}
+
+.techParams strong {
+  font-weight: bold;
+}
+
+.techParams span {
+  color: purple;
+  margin: 0;
+}
+
+.svgCircleDiv {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.svgPriceParamsWrapper {
+  position: relative;
+  height: 24px;
+}
+
+.svgPriceParamsWrapper:hover .priceParams {
+  display: block;
+}
+
+.priceParams {
+  width: 280px;
+  position: absolute;
+  left: 50%;
+  top: 85%;
+  transform: translateX(0%);
+  border-radius: 8px;
+  background-color: whitesmoke;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  display: none;
+  box-shadow: 0 0 6px #fff;
+}
+
+.priceParams li {
+  padding: 0.5rem;
+  margin: 0;
+  color: purple;
+  list-style: none;
+}
+
+.svg {
+  color: beige;
 }

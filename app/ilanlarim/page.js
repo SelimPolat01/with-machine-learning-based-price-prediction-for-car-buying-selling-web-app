@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { AnimatePresence } from "framer-motion";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ManagementNav from "../components/ManagementNav";
 
 export default function MyAdverts() {
   const [myAdverts, setMyAdverts] = useState([]);
@@ -112,11 +113,9 @@ export default function MyAdverts() {
 
   // if (loading) return <LoadingSpinner />;
   if (error) return <p>{error}</p>;
-  if (myAdverts.length === 0)
-    return <p>Mevcut bir ilanınız bulunmamaktadır.</p>;
 
   return (
-    <main className={classes.main}>
+    <div className={classes.mainDiv}>
       <ConfirmDialog
         ref={deleteDialogRef}
         onConfirm={() => advertDeleteHandler(selectedAdvertId)}
@@ -127,26 +126,36 @@ export default function MyAdverts() {
         onConfirm={() => editAdvertHandler(selectedAdvertId)}
         text="Bu ilanı düzenlemek"
       />
-      <AnimatePresence>
-        {myAdverts.map((myAdvert) => (
-          <AdvertItem
-            id={myAdvert.id}
-            key={myAdvert.id}
-            userId={myAdvert.user_id}
-            imgSrc={myAdvert.image_src}
-            brand={myAdvert.brand}
-            model={myAdvert.model}
-            engineCapacity={myAdvert.engine_capacity}
-            modelYear={myAdvert.model_year}
-            price={myAdvert.price}
-            city={myAdvert.city}
-            onDeleteDialog={() => openDeleteModal(myAdvert.id)}
-            onEditDialog={() => openEditModal(myAdvert.id)}
-            showDeleteButton={true}
-            showEditButton={true}
-          />
-        ))}
-      </AnimatePresence>
-    </main>
+      <ManagementNav className={classes.managementNav} />
+      <div className={classes.div}>
+        <AnimatePresence>
+          {myAdverts &&
+            myAdverts.map((myAdvert) => (
+              <AdvertItem
+                id={myAdvert.id}
+                key={myAdvert.id}
+                userId={myAdvert.user_id}
+                imgSrc={myAdvert.image_src}
+                brand={myAdvert.brand}
+                model={myAdvert.model}
+                engineCapacity={myAdvert.engine_capacity}
+                modelYear={myAdvert.model_year}
+                price={myAdvert.price}
+                city={myAdvert.city}
+                onDeleteDialog={() => openDeleteModal(myAdvert.id)}
+                onEditDialog={() => openEditModal(myAdvert.id)}
+                showDeleteButton={true}
+                showEditButton={true}
+              />
+            ))}
+        </AnimatePresence>
+
+        {myAdverts.length === 0 && (
+          <div className={classes.noAdvertDiv}>
+            <p>İlanınınız bulunmamaktadır.</p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

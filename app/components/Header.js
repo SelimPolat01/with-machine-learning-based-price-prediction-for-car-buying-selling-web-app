@@ -44,30 +44,6 @@ export default function Header({ className }) {
         className: "homeLink",
         title: "Anasayfa",
       },
-      // {
-      //   href: "/hesabim",
-      //   label: <i className="bi bi-person"></i>,
-      //   className: "accountLink",
-      //   title: "Hesabım",
-      // },
-      // {
-      //   href: "/ilanlarim",
-      //   label: <i className="bi bi-megaphone"></i>,
-      //   className: "myAdvertsLink",
-      //   title: "İlanlarım",
-      // },
-      // {
-      //   href: "/tum-ilanlar",
-      //   label: <i className="bi bi-card-list"></i>,
-      //   className: "allAdvertsLink",
-      //   title: "Tüm İlanlar",
-      // },
-      // {
-      //   href: "/favori-ilanlar",
-      //   label: <i className="bi bi-heart-fill"></i>,
-      //   className: "favoriteAdvertsLink",
-      //   title: "Favori İlanlar",
-      // },
     ],
   };
 
@@ -150,7 +126,7 @@ export default function Header({ className }) {
                     className={classes.favoriteAdvertsLink}
                     title="Favori İlanlarım"
                   >
-                    <i className="bi bi-heart-fill"></i> Favori İlanlarım
+                    <i className="bi bi-heart-fill"></i> Favorilerim
                   </Link>
                   <Link
                     href="/hesabim"
@@ -171,21 +147,6 @@ export default function Header({ className }) {
               </li>
             </>
           )}
-
-          {/* {isLogin && (
-            <li className={classes.li}>
-              <Link
-                onClick={logoutHandler}
-                className={`${classes.logoutLink}${
-                  className ? ` ${className}` : ""
-                }`}
-                title="Çıkış Yap"
-                href="/login"
-              >
-                <i className="bi bi-box-arrow-right"></i>
-              </Link>
-            </li>
-          )} */}
         </ul>
       </nav>
     </header>

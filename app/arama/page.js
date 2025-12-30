@@ -89,32 +89,37 @@ export default function SearchCar() {
           <span>İlan Tarihi</span>
           <span>İl</span>
         </div>
-        {filteredAdverts.map((filteredAdvert) => (
-          <Link
-            key={filteredAdvert.id}
-            href={`/ilan/${filteredAdvert.brand}-${filteredAdvert.model}-${filteredAdvert.model_year}/${filteredAdvert.id}`}
-            className={classes.listItem}
-          >
-            <img
-              className={classes.img}
-              src={filteredAdvert.image_src}
-              alt={filteredAdvert.title}
-            />
+        <div className={classes.filteredAdvertDiv}>
+          {filteredAdverts.map((filteredAdvert) => (
+            <Link
+              key={filteredAdvert.id}
+              href={`/ilan/${filteredAdvert.brand}-${filteredAdvert.model}-${filteredAdvert.model_year}/${filteredAdvert.id}`}
+              className={classes.listItem}
+            >
+              <img
+                className={classes.img}
+                src={filteredAdvert.image_src}
+                alt={filteredAdvert.title}
+              />
 
-            <span className={classes.title}>{filteredAdvert.title}</span>
-            <span className={classes.price}>
-              {filteredAdvert.price.toLocaleString("tr-TR")} ₺
-            </span>
-            <span>
-              {new Date(filteredAdvert.created_at).toLocaleDateString("tr-TR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
-            <span>{capitalize(filteredAdvert.city)}</span>
-          </Link>
-        ))}
+              <span className={classes.title}>{filteredAdvert.title}</span>
+              <span className={classes.price}>
+                {filteredAdvert.price.toLocaleString("tr-TR")} ₺
+              </span>
+              <span>
+                {new Date(filteredAdvert.created_at).toLocaleDateString(
+                  "tr-TR",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                )}
+              </span>
+              <span>{capitalize(filteredAdvert.city)}</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

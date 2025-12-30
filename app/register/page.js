@@ -137,6 +137,7 @@ export default function Register() {
     <div className={classes.div}>
       <form className={classes.form} onSubmit={submitHandler}>
         <Input
+          className={classes.input}
           type="text"
           identifier="email"
           onChange={inputChangeHandler}
@@ -174,6 +175,7 @@ export default function Register() {
         )}
         <div className={classes.nameSurnameDiv}>
           <Input
+            className={classes.input}
             type="text"
             identifier="name"
             onChange={inputChangeHandler}

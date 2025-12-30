@@ -24,6 +24,7 @@
   display: flex;
   gap: 1rem;
   margin: 0 0 1rem 0;
+  align-items: flex-start;
 }
 
 .advertInfoWrapper2 {
@@ -67,9 +68,9 @@
 
 .userInfoDiv {
   width: 18rem;
-  height: 12rem;
   background-color: beige;
   border-radius: 8px;
+  height: auto;
 }
 
 .userInfoWrapper {
@@ -104,13 +105,18 @@
   font-weight: bold;
 }
 
-.buttonTelDiv {
+.messageLink {
   display: flex;
   justify-content: center;
 }
 
-.buttonTelDiv button {
+.messageLink a {
+  font-family: "Oswald", sans-serif;
   color: rgb(72, 144, 216);
+}
+
+.messageLink a:hover {
+  text-decoration: underline;
 }
 
 .descriptionTextDiv {
@@ -123,6 +129,8 @@
 
 .descriptionDiv {
   border: 1px solid beige;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .descriptionWrapper {
@@ -172,4 +180,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.input {
+  width: 218px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  outline: whitesmoke;
+  font-family: "Oswald", sans-serif;
+  overflow-y: auto;
+  padding: 0 8px;
 }

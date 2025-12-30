@@ -1,7 +1,6 @@
 "use client";
 
 import { useCheckAuth } from "@/backend/utils/useCheckAuth";
-import Link from "next/link";
 import { useSelector } from "react-redux";
 import classes from "./FiyatTeklifi.module.css";
 import { animate, motion } from "framer-motion";
@@ -28,7 +27,7 @@ export default function PriceOffer() {
 
   useEffect(() => {
     const controls = animate(0, price, {
-      duration: 10,
+      duration: 5,
       ease: "easeOut",
       onUpdate: (value) => setDisplayPrice(value),
       onComplete: () => setAnimationFinished(true),
@@ -52,53 +51,114 @@ export default function PriceOffer() {
 
   return (
     <div className={classes.wrapperDiv}>
-      <div className={classes.carModel}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeIn" }}
+        className={classes.carModel}
+      >
         <h2>
-          {prediction.brand.toUpperCase()} {capitalize(prediction.model)}{" "}
+          {decodeURIComponent(prediction.brand.toUpperCase())}{" "}
+          {decodeURIComponent(prediction.model.toUpperCase())}{" "}
           {engineCapacityFormat(prediction.engineCapacity)}
         </h2>
-        <svg
-          className={classes.svg}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{ width: "20px", height: "20px" }}
-        >
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="16" x2="12" y2="12" />
-          <line x1="12" y1="8" x2="12" y2="8" />
-        </svg>
-        <div className={classes.techParams}>
-          <p>Marka: </p>
-          <p>Model: </p>
-          <p>Yıl: </p>
-          <p>Motor Hacmi: </p>
-          <p>Yakıt Tipi: </p>
-          <p>Kilometre: </p>
+        <div className={classes.svgTechParamsWrapper}>
+          <svg
+            className={classes.svg}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ width: "20px", height: "20px" }}
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12" y2="8" />
+          </svg>
+          <div className={classes.techParams}>
+            <ul>
+              <li>
+                <strong>Marka: </strong>
+                <span>{decodeURIComponent(capitalize(prediction.brand))}</span>
+              </li>
+              <li>
+                <strong>Model: </strong>
+                <span>{decodeURIComponent(capitalize(prediction.model))}</span>
+              </li>
+              <li>
+                <strong>Yıl: </strong>
+                <span>{prediction.modelYear}</span>
+              </li>
+              <li>
+                <strong>Motor Hacmi: </strong>
+                <span>{engineCapacityFormat(prediction.engineCapacity)}</span>
+              </li>
+              <li>
+                <strong>Yakıt Tipi: </strong>
+                <span>{capitalize(prediction.fuelType)}</span>
+              </li>
+              <li>
+                <strong>Kilometre: </strong> <span>{prediction.kilometer}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </motion.div>
       <div className={classes.div}>
-        <motion.div
-          initial={{ opacity: 0, backgroundColor: "#d4f7dc" }}
-          animate={{
-            opacity: 1,
-            backgroundColor: ["#a8f0b0", "#6edc7b", "#39b44a", "#1b8a2d"],
-          }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className={classes.circle}
-        >
-          <h1 className={classes.priceOfferText}>
-            Fiyat teklifi:{" "}
-            <span className={classes.priceOffer}>
-              {Math.floor(displayPrice).toLocaleString("tr-TR")} ₺
-            </span>{" "}
-          </h1>
-        </motion.div>
-
+        <div className={classes.svgCircleDiv}>
+          <div className={classes.priceOfferDiv}>
+            <motion.div
+              initial={{ opacity: 0, backgroundColor: "#d4f7dc" }}
+              animate={{
+                opacity: 1,
+                backgroundColor: ["#a8f0b0", "#6edc7b", "#39b44a", "#1b8a2d"],
+              }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className={classes.circle}
+            >
+              <h1 className={classes.priceOfferText}>
+                <strong>Fiyat teklifi: </strong>
+                <span>
+                  {Math.floor(displayPrice).toLocaleString("tr-TR")} ₺
+                </span>
+              </h1>
+            </motion.div>
+          </div>
+          {animationFinished && (
+            <div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeIn" }}
+              className={classes.svgPriceParamsWrapper}
+            >
+              <svg
+                className={classes.svg}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ width: "20px", height: "20px" }}
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12" y2="8" />
+              </svg>
+              <ul className={classes.priceParams}>
+                <li>
+                  Aracınızın marka, model, yıl, motor hacmi ve kilometresi gibi
+                  faktörler ile piyasa verilerini analiz ederek size en güncel
+                  ve adil fiyat teklifini sunuyoruz.
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
         {animationFinished && (
           <motion.div
             className={classes.validatyDateDiv}
@@ -107,7 +167,7 @@ export default function PriceOffer() {
             transition={{ duration: 1, ease: "easeIn" }}
           >
             <p className={classes.validatyDate}>
-              Fiyat teklif geçerlilik tarihi:{" "}
+              <strong>Fiyat teklif geçerlilik tarihi: </strong>
               <span>{formattedValidatyDate}</span>
             </p>
           </motion.div>
